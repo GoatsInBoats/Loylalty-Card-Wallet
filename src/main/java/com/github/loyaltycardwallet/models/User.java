@@ -25,8 +25,8 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
-//    @OneToOne
-//    private UserSpecifics userSpecifics;
+    @OneToOne
+    private UserSpecifics userSpecifics;
 
     @NotBlank(message = "Username is mandatory")
     @Size(min = 3, max = 100, message = "password length out of range")
