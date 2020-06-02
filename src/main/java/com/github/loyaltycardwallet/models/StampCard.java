@@ -17,9 +17,8 @@ public class StampCard {
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
-//    @OneToOne
-//    private Company company;
-    //TODO
+    @OneToOne
+    private Company company;
 
     private int score;
 

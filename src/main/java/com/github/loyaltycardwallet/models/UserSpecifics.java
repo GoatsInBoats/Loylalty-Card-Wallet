@@ -33,6 +33,6 @@ public class UserSpecifics {
     @Email(message = "email invalid")
     private String email;
 
-//    @OneToOne
-//    private Company company;
+    @OneToOne
+    private Company company;
 }
