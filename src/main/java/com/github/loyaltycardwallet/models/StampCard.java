@@ -2,7 +2,10 @@ package com.github.loyaltycardwallet.models;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Data
@@ -17,8 +20,9 @@ public class StampCard {
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
-    @OneToOne
-    private Company company;
+    //SHOULD BE IN THE COMPANY SPECIFICS
+//    @OneToOne
+//    private Company company;
 
     private int score;
 
