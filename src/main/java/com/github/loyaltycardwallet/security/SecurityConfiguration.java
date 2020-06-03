@@ -41,6 +41,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 (httpServletRequest, httpServletResponse, e) -> httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userService))
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll();
     }
