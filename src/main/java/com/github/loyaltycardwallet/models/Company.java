@@ -2,10 +2,7 @@ package com.github.loyaltycardwallet.models;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Data
@@ -29,6 +26,9 @@ public class Company {
     private String street;
 
     private long localNumber;
+
+    @OneToOne
+    private StampCard stampCard;
 
     public Company(String companyName, String city, String zipCode, String street, long localNumber) {
         this.companyName = companyName;
