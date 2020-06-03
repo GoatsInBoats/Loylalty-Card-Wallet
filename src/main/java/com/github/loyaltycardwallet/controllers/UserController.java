@@ -3,9 +3,6 @@ package com.github.loyaltycardwallet.controllers;
 
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.services.implementation.UserServiceImpl;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
