@@ -18,4 +18,5 @@ public interface CompanyService {
     boolean existById(UUID id);
 
     Optional<Company> findByName(String username);
+
 }

@@ -47,4 +47,5 @@ public class CompanyServiceImpl implements CompanyService {
     public boolean existById(UUID id) {
         return companyRepository.existsById(id);
     }
+
 }
