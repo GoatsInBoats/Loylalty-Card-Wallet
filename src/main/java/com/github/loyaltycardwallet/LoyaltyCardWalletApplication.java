@@ -15,8 +15,4 @@ public class LoyaltyCardWalletApplication {
 		SpringApplication.run(LoyaltyCardWalletApplication.class, args);
 	}
 
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
 }
