@@ -24,8 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<Company> findByName(String companyName) {
-        return companyRepository.findByCompanyName(companyName);
+    public Optional<Company> findCompanyByStampCardId(UUID scId) {
+        return companyRepository.findCompanyByStampCardId(scId);
     }
 
     @Override
