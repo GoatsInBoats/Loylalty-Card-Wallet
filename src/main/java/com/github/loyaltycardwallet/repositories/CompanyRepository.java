@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, UUID> {
-    //should be company here instead of user
-    Optional<Company> findByCompanyName(String companyName);
+
+    Optional<Company> findCompanyByStampCardId(UUID scId);
 
     boolean existsById(UUID id);
 }

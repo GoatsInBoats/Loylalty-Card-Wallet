@@ -17,6 +17,6 @@ public interface CompanyService {
 
     boolean existById(UUID id);
 
-    Optional<Company> findByName(String username);
+    Optional<Company> findCompanyByStampCardId(UUID scId);
 
 }

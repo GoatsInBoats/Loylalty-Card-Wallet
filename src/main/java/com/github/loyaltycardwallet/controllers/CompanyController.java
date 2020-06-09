@@ -61,5 +61,13 @@ public class CompanyController {
         }
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/stampcard/{id}")
+    public ResponseEntity<Company> getCompanyNameByStampCardId(@PathVariable UUID id) {
+        return companyService.findCompanyByStampCardId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
 
