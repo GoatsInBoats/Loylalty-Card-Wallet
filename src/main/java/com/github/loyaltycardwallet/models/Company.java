@@ -27,15 +27,11 @@ public class Company {
 
     private long localNumber;
 
+    private String longitude;
+
+    private String latitude;
+
     @OneToOne
     private StampCard stampCard;
-
-    public Company(String companyName, String city, String zipCode, String street, long localNumber) {
-        this.companyName = companyName;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.street = street;
-        this.localNumber = localNumber;
-    }
 
 }
