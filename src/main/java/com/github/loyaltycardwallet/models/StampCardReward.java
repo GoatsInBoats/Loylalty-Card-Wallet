@@ -22,7 +22,4 @@ public class StampCardReward {
     @ManyToOne
     private Reward reward;
 
-    @ManyToOne
-    private StampCard stampCard;
-
 }
