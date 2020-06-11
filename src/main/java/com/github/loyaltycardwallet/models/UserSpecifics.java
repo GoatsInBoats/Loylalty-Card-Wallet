@@ -6,9 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -28,11 +27,12 @@ public class UserSpecifics {
 
     private String lastName;
 
-    @NotBlank(message = "email is mandatory")
-    @Size(min = 3, max = 200, message = "email length out of range")
-    @Email(message = "email invalid")
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     @OneToOne
     private Company company;
+
+    @OneToMany
+    private List<StampCardProgress> stampCardProgresses;
 }

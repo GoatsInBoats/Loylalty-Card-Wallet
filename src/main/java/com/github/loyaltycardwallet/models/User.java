@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.*;
 
 @Data
@@ -25,21 +24,19 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
-    @OneToOne
-    private UserSpecifics userSpecifics;
-
     @NotBlank(message = "Username is mandatory")
-    @Size(min = 3, max = 100, message = "password length out of range")
     @Column(nullable = false)
     private String username;
 
-    @NotBlank(message = "password is mandatory")
-    @Size(min = 5, max = 100, message = "password length out of range")
+    @NotBlank(message = "Password is mandatory")
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private int active;
+
+    @OneToOne
+    private UserSpecifics userSpecifics;
 
     @Column(nullable = false)
     private String roles = "";
@@ -55,6 +52,7 @@ public class User implements UserDetails {
         this.active = 1;
     }
 
+    @JsonIgnore
     public List<String> getRoleList() {
         if (this.roles.length() > 0) {
             return Arrays.asList(this.roles.split(","));
@@ -62,6 +60,7 @@ public class User implements UserDetails {
         return new ArrayList<>();
     }
 
+    @JsonIgnore
     public List<String> getPermissionList() {
         if (this.permissions.length() > 0) {
             return Arrays.asList(this.permissions.split(","));
@@ -69,6 +68,7 @@ public class User implements UserDetails {
         return new ArrayList<>();
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
