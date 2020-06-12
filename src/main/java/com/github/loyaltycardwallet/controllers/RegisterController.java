@@ -19,7 +19,8 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/register")
 public class RegisterController {
-    private RegisterService registerService;
+
+    private final RegisterService registerService;
 
     @PostMapping(
             value = "/user",

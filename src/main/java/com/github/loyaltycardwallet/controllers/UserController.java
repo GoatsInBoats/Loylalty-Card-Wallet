@@ -2,7 +2,8 @@ package com.github.loyaltycardwallet.controllers;
 
 
 import com.github.loyaltycardwallet.models.User;
-import com.github.loyaltycardwallet.services.implementation.UserServiceImpl;
+import com.github.loyaltycardwallet.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserServiceImpl userService;
-
-    public UserController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {

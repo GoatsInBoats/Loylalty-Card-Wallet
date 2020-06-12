@@ -3,20 +3,19 @@ package com.github.loyaltycardwallet.services.implementation;
 import com.github.loyaltycardwallet.models.StampCard;
 import com.github.loyaltycardwallet.repositories.StampCardRepository;
 import com.github.loyaltycardwallet.services.StampCardService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
-public class StampCardServiceImpl implements StampCardService {
+class StampCardServiceImpl implements StampCardService {
 
-    private StampCardRepository stampCardRepository;
-
-    public StampCardServiceImpl(StampCardRepository stampCardRepository) {
-        this.stampCardRepository = stampCardRepository;
-    }
+    private final StampCardRepository stampCardRepository;
 
     @Override
     public List<StampCard> findAll() {

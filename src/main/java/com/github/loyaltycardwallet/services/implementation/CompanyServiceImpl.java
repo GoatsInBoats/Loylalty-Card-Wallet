@@ -3,20 +3,19 @@ package com.github.loyaltycardwallet.services.implementation;
 import com.github.loyaltycardwallet.models.Company;
 import com.github.loyaltycardwallet.repositories.CompanyRepository;
 import com.github.loyaltycardwallet.services.CompanyService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
-public class CompanyServiceImpl implements CompanyService {
+class CompanyServiceImpl implements CompanyService {
 
-    private CompanyRepository companyRepository;
-
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
-    }
+    private final CompanyRepository companyRepository;
 
     @Override
     public List<Company> findAll() {

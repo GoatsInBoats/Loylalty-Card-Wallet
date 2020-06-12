@@ -2,6 +2,7 @@ package com.github.loyaltycardwallet.controllers;
 
 import com.github.loyaltycardwallet.models.StampCardReward;
 import com.github.loyaltycardwallet.services.StampCardRewardService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
-@CrossOrigin
 @RequestMapping("/api/stampcards-rewards")
 public class StampCardRewardController {
-    private StampCardRewardService stampCardRewardService;
 
-    public StampCardRewardController(StampCardRewardService stampCardRewardService) {
-        this.stampCardRewardService = stampCardRewardService;
-    }
+    private final StampCardRewardService stampCardRewardService;
 
     @GetMapping
     public ResponseEntity<List<StampCardReward>> getAll() {

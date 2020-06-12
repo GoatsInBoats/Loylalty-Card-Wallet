@@ -13,7 +13,7 @@ public interface UserService {
 
     User save(User user);
 
-    void deleteById(UUID id) throws Exception;
+    void deleteById(UUID id);
 
     User findByUsername(String username);
 

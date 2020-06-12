@@ -3,20 +3,19 @@ package com.github.loyaltycardwallet.services.implementation;
 import com.github.loyaltycardwallet.models.UserSpecifics;
 import com.github.loyaltycardwallet.repositories.UserSpecificsRepository;
 import com.github.loyaltycardwallet.services.UserSpecificsService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
-public class UserSpecificsServiceImpl implements UserSpecificsService {
+class UserSpecificsServiceImpl implements UserSpecificsService {
 
-    private UserSpecificsRepository userSpecificsRepository;
-
-    public UserSpecificsServiceImpl(UserSpecificsRepository userSpecificsRepository) {
-        this.userSpecificsRepository = userSpecificsRepository;
-    }
+    private final UserSpecificsRepository userSpecificsRepository;
 
     @Override
     public List<UserSpecifics> findAll() {

@@ -17,8 +17,9 @@ import java.io.IOException;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-    private UserService userService;
+class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+
+    private final UserService userService;
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserService userService) {
         super(authenticationManager);

@@ -8,5 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface RewardRepository extends JpaRepository<Reward, UUID> {
+
     boolean existsById(UUID id);
 }

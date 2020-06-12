@@ -14,6 +14,7 @@ import com.github.loyaltycardwallet.repositories.CompanyRepository;
 import com.github.loyaltycardwallet.repositories.UserRepository;
 import com.github.loyaltycardwallet.repositories.UserSpecificsRepository;
 import com.github.loyaltycardwallet.services.RegisterService;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,13 +24,13 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
-public class RegisterServiceImpl implements RegisterService {
-    private UserRepository userRepository;
-    private UserSpecificsRepository userSpecificsRepository;
-    private CompanyRepository companyRepository;
-    private PasswordEncoder passwordEncoder;
+class RegisterServiceImpl implements RegisterService {
+    private final UserRepository userRepository;
+    private final UserSpecificsRepository userSpecificsRepository;
+    private final CompanyRepository companyRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User normalUserRegister(NormalUserRegisterDTO normalUserRegisterDTO) {

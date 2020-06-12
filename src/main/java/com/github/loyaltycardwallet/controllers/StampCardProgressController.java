@@ -2,6 +2,7 @@ package com.github.loyaltycardwallet.controllers;
 
 import com.github.loyaltycardwallet.models.StampCardProgress;
 import com.github.loyaltycardwallet.services.StampCardProgressService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
-@CrossOrigin
 @RequestMapping("/api/stampcards-progresses")
 public class StampCardProgressController {
-    private StampCardProgressService stampCardProgressService;
 
-    public StampCardProgressController(StampCardProgressService stampCardProgressService) {
-        this.stampCardProgressService = stampCardProgressService;
-    }
+    private final StampCardProgressService stampCardProgressService;
 
     @GetMapping
     public ResponseEntity<List<StampCardProgress>> getAll() {
