@@ -3,6 +3,8 @@ package com.github.loyaltycardwallet.services.implementation;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.repositories.UserRepository;
 import com.github.loyaltycardwallet.services.UserService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,14 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public List<User> findAll() {

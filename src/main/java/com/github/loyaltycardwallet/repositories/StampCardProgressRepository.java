@@ -8,5 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface StampCardProgressRepository extends JpaRepository<StampCardProgress, UUID> {
+
     boolean existsById(UUID id);
 }

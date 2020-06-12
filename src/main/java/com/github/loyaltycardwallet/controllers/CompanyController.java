@@ -1,7 +1,8 @@
 package com.github.loyaltycardwallet.controllers;
 
 import com.github.loyaltycardwallet.models.Company;
-import com.github.loyaltycardwallet.services.implementation.CompanyServiceImpl;
+import com.github.loyaltycardwallet.services.CompanyService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/companies")
-@CrossOrigin
 public class CompanyController {
-    private CompanyServiceImpl companyService;
 
-    public CompanyController(CompanyServiceImpl companyService) {
-        this.companyService = companyService;
-    }
+    private final CompanyService companyService;
 
     @GetMapping
     public ResponseEntity<List<Company>> getAll() {
@@ -33,7 +31,6 @@ public class CompanyController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,

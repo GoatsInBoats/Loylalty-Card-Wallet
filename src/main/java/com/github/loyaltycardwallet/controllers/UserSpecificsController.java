@@ -2,6 +2,7 @@ package com.github.loyaltycardwallet.controllers;
 
 import com.github.loyaltycardwallet.models.UserSpecifics;
 import com.github.loyaltycardwallet.services.UserSpecificsService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/users-specifics")
 public class UserSpecificsController {
 
-    private UserSpecificsService userSpecificsService;
-
-    public UserSpecificsController(UserSpecificsService userSpecificsService) {
-        this.userSpecificsService = userSpecificsService;
-    }
+    private final UserSpecificsService userSpecificsService;
 
     @GetMapping
     public ResponseEntity<List<UserSpecifics>> getAll() {

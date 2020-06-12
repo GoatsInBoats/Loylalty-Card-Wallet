@@ -3,20 +3,19 @@ package com.github.loyaltycardwallet.services.implementation;
 import com.github.loyaltycardwallet.models.StampCardReward;
 import com.github.loyaltycardwallet.repositories.StampCardRewardRepository;
 import com.github.loyaltycardwallet.services.StampCardRewardService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
-public class StampCardRewardServiceImpl implements StampCardRewardService {
+class StampCardRewardServiceImpl implements StampCardRewardService {
 
-    private StampCardRewardRepository stampCardRewardRepository;
-
-    public StampCardRewardServiceImpl(StampCardRewardRepository stampCardRewardRepository) {
-        this.stampCardRewardRepository = stampCardRewardRepository;
-    }
+    private final StampCardRewardRepository stampCardRewardRepository;
 
     @Override
     public List<StampCardReward> findAll() {
@@ -27,7 +26,6 @@ public class StampCardRewardServiceImpl implements StampCardRewardService {
     public StampCardReward save(StampCardReward stampCardReward) {
         return stampCardRewardRepository.save(stampCardReward);
     }
-
 
     @Override
     public Optional<StampCardReward> findById(UUID id) {

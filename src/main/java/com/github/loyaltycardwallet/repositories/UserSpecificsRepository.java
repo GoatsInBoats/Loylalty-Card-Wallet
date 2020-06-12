@@ -8,5 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface UserSpecificsRepository extends JpaRepository<UserSpecifics, UUID> {
+
     boolean existsById(UUID id);
 }

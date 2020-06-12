@@ -23,7 +23,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private final UserService userService;
 
     public SecurityConfiguration(UserService userService) {
         this.userService = userService;
