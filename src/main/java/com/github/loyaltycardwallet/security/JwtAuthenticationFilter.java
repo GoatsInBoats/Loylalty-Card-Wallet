@@ -60,10 +60,13 @@ class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         // add token to response body
 
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter()
-                .write("{\"" + JwtProperties.HEADER_STRING + "\":\"" + JwtProperties.TOKEN_PREFIX + token + "\"}");
 
+        StringBuilder sb = new StringBuilder();
+        response.getWriter()
+                .write(sb.append("{\"").append(JwtProperties.HEADER_STRING).append("\":\"").append(JwtProperties.TOKEN_PREFIX).append(token).append("\",")
+                        .append("\"").append(JwtProperties.USER_ID).append("\":\"").append(principal.getId().toString()).append("\"}").toString());
     }
 }
