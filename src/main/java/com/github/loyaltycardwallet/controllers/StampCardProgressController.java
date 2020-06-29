@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/stampcards-progresses")
 public class StampCardProgressController {
 
-    private final StampCardProgressService stampCardProgressService;
+    private StampCardProgressService stampCardProgressService;
 
     @GetMapping
     public ResponseEntity<List<StampCardProgress>> getAll() {

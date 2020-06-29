@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 class CompanyServiceImpl implements CompanyService {
 
-    private final CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
 
     @Override
     public List<Company> findAll() {

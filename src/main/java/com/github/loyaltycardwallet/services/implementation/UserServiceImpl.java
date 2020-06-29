@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public List<User> findAll() {

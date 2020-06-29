@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 class StampCardRewardServiceImpl implements StampCardRewardService {
 
-    private final StampCardRewardRepository stampCardRewardRepository;
+    private StampCardRewardRepository stampCardRewardRepository;
 
     @Override
     public List<StampCardReward> findAll() {

@@ -27,10 +27,10 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Service
 class RegisterServiceImpl implements RegisterService {
-    private final UserRepository userRepository;
-    private final UserSpecificsRepository userSpecificsRepository;
-    private final CompanyRepository companyRepository;
-    private final PasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
+    private UserSpecificsRepository userSpecificsRepository;
+    private CompanyRepository companyRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User normalUserRegister(NormalUserRegisterDTO normalUserRegisterDTO) {

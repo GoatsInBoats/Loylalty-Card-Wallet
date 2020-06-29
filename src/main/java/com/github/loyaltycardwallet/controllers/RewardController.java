@@ -1,7 +1,7 @@
 package com.github.loyaltycardwallet.controllers;
 
-import com.github.loyaltycardwallet.models.StampCard;
-import com.github.loyaltycardwallet.services.StampCardService;
+import com.github.loyaltycardwallet.models.Reward;
+import com.github.loyaltycardwallet.services.RewardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,19 +15,18 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/stampcards")
-public class StampCardController {
-
-    private StampCardService stampCardService;
+@RequestMapping("/api/rewards")
+public class RewardController {
+    private RewardService rewardService;
 
     @GetMapping
-    public ResponseEntity<List<StampCard>> getAll() {
-        return ResponseEntity.ok(stampCardService.findAll());
+    public ResponseEntity<List<Reward>> getAll() {
+        return ResponseEntity.ok(rewardService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StampCard> getById(@PathVariable UUID id) {
-        return stampCardService.findById(id)
+    public ResponseEntity<Reward> getById(@PathVariable UUID id) {
+        return rewardService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -35,28 +34,27 @@ public class StampCardController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StampCard> add(@RequestBody @Valid StampCard stampCard) {
-        StampCard newStampCard = stampCardService.save(stampCard);
-        return ResponseEntity.created(URI.create("/" + newStampCard.getId())).body(newStampCard);
+    public ResponseEntity<Reward> add(@RequestBody @Valid Reward reward) {
+        Reward newReward = rewardService.save(reward);
+        return ResponseEntity.created(URI.create("/" + newReward.getId())).body(newReward);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StampCard> updateUser(@PathVariable UUID id, @RequestBody @Valid StampCard stampCard) {
-        if (!stampCardService.existById(id)) {
+    public ResponseEntity<Reward> update(@PathVariable UUID id, @RequestBody @Valid Reward reward) {
+        if (!rewardService.existById(id)) {
             return ResponseEntity.notFound().build();
         }
-        stampCard.setId(id);
-        stampCardService.save(stampCard);
+        reward.setId(id);
+        rewardService.save(reward);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable UUID id) {
-        stampCardService.deleteById(id);
-        if (!stampCardService.existById(id)) {
+        rewardService.deleteById(id);
+        if (!rewardService.existById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
     }
-
 }

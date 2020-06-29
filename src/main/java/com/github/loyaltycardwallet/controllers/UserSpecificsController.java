@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/users-specifics")
 public class UserSpecificsController {
 
-    private final UserSpecificsService userSpecificsService;
+    private UserSpecificsService userSpecificsService;
 
     @GetMapping
     public ResponseEntity<List<UserSpecifics>> getAll() {
