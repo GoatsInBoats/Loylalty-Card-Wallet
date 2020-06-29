@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/companies")
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private CompanyService companyService;
 
     @GetMapping
     public ResponseEntity<List<Company>> getAll() {
@@ -40,7 +40,7 @@ public class CompanyController {
         return ResponseEntity.created(URI.create("/" + newCompany.getId())).body(newCompany);
     }
 
-    @PutMapping(value = {"/id"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Company> update(@PathVariable UUID id, @RequestBody Company company) {
         if (!companyService.existById(id)) {
             return ResponseEntity.notFound().build();

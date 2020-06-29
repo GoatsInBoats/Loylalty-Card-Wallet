@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/stampcards-rewards")
 public class StampCardRewardController {
 
-    private final StampCardRewardService stampCardRewardService;
+    private StampCardRewardService stampCardRewardService;
 
     @GetMapping
     public ResponseEntity<List<StampCardReward>> getAll() {

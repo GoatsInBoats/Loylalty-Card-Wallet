@@ -47,7 +47,7 @@ class UserControllerTest {
 
     private JacksonTester<User> jsonUser;
 
-    private User ronaldo;
+    private User testUser;
 
     @BeforeEach
     public void setup() {
@@ -55,11 +55,11 @@ class UserControllerTest {
 
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-        ronaldo = User
+        testUser = User
                 .builder()
                 .id(UUID.fromString("ae737b90-a25b-46b1-8b3d-e6407cf726c2"))
-                .username("ronaldo")
-                .password(new BCryptPasswordEncoder().encode("ronaldo123"))
+                .username("testUser")
+                .password(new BCryptPasswordEncoder().encode("testUser123"))
                 .roles("MANAGER")
                 .permissions("ACCESS_TEST2")
                 .userSpecifics(null)
@@ -70,7 +70,7 @@ class UserControllerTest {
 
     @Test
     void testDoesMethodGetAllUsersReturnsStatusCode200() throws Exception {
-        List<User> userList = new ArrayList<>(Arrays.asList(ronaldo));
+        List<User> userList = new ArrayList<>(Arrays.asList(testUser));
 
         BDDMockito.when(userService.findAll())
                 .thenReturn(userList);
@@ -91,12 +91,12 @@ class UserControllerTest {
     @Test
     void testDoesMethodAddUserReturnsStatusCode202() throws Exception {
         BDDMockito.when(userService.save(BDDMockito.any()))
-                .thenReturn(ronaldo);
+                .thenReturn(testUser);
 
         MockHttpServletResponse response = mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonUser.write(ronaldo).getJson()))
+                        .content(jsonUser.write(testUser).getJson()))
                 .andReturn().getResponse();
 
         log.warn(response.getContentAsString());
@@ -112,12 +112,12 @@ class UserControllerTest {
                 .thenReturn(false);
 
         BDDMockito.when(userService.save(BDDMockito.any()))
-                .thenReturn(ronaldo);
+                .thenReturn(testUser);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.put("/api/users/ae737b90-a25b-46b1-8b3d-e6407cf726c2")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonUser.write(ronaldo).getJson()))
+                        .content(jsonUser.write(testUser).getJson()))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
@@ -127,14 +127,14 @@ class UserControllerTest {
                 .thenReturn(true);
 
         BDDMockito.when(userService.save(BDDMockito.any()))
-                .thenReturn(ronaldo);
+                .thenReturn(testUser);
 
-        ronaldo.setUsername("Kronaldo");
+        testUser.setUsername("KtestUser");
 
         mockMvc.perform(
                 MockMvcRequestBuilders.put("/api/users/ae737b90-a25b-46b1-8b3d-e6407cf726c2")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonUser.write(ronaldo).getJson()))
+                        .content(jsonUser.write(testUser).getJson()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
 
     }

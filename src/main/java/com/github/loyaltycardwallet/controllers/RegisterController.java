@@ -20,7 +20,7 @@ import java.net.URI;
 @RequestMapping("/api/register")
 public class RegisterController {
 
-    private final RegisterService registerService;
+    private RegisterService registerService;
 
     @PostMapping(
             value = "/user",
