@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -58,5 +59,13 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("roles/{role}")
+    public ResponseEntity<List<User>> getUsersWithRole(@PathVariable String role) {
+        return ResponseEntity.ok(userService.findAll()
+                .stream()
+                .filter(user -> user.getRoles().equals(role.toUpperCase()))
+                .collect(Collectors.toList()));
     }
 }
