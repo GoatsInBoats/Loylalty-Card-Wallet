@@ -1,7 +1,7 @@
 package com.github.loyaltycardwallet.services;
 
-import com.github.loyaltycardwallet.dto.ManagerEditDTO;
-import com.github.loyaltycardwallet.dto.NormalUserEditDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.models.User;
 
 import java.io.IOException;
@@ -22,8 +22,8 @@ public interface UserService {
 
     boolean existById(UUID id);
 
-    void editNormalUserFields(NormalUserEditDTO normalUserEditDTO, User normalUser);
+    void editNormalUserFields(NormalUserRegisterAndEditDTO normalUserEditDTO, User normalUser);
 
-    void editManagerFields(ManagerEditDTO managerEditDTO, User manager) throws IOException;
+    void editManagerFields(ManagerRegisterAndEditDTO managerEditDTO, User manager) throws IOException;
 }
 

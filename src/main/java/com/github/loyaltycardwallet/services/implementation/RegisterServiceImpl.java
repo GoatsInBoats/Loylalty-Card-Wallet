@@ -1,8 +1,8 @@
 package com.github.loyaltycardwallet.services.implementation;
 
 
-import com.github.loyaltycardwallet.dto.ManagerRegisterDTO;
-import com.github.loyaltycardwallet.dto.NormalUserRegisterDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.map.GeocodeController;
 import com.github.loyaltycardwallet.map.GeocodeGeometry;
 import com.github.loyaltycardwallet.map.GeocodeObject;
@@ -35,12 +35,12 @@ class RegisterServiceImpl implements RegisterService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User normalUserRegister(NormalUserRegisterDTO normalUserRegisterDTO) {
+    public User normalUserRegister(NormalUserRegisterAndEditDTO normalUserRegisterAndEditDTO) {
         UserSpecifics userSpecifics = UserSpecifics
                 .builder()
-                .firstName(normalUserRegisterDTO.getFirstName())
-                .lastName(normalUserRegisterDTO.getLastName())
-                .email(normalUserRegisterDTO.getEmail())
+                .firstName(normalUserRegisterAndEditDTO.getFirstName())
+                .lastName(normalUserRegisterAndEditDTO.getLastName())
+                .email(normalUserRegisterAndEditDTO.getEmail())
                 .company(null)
                 .stampCardProgresses(null)
                 .build();
@@ -49,8 +49,8 @@ class RegisterServiceImpl implements RegisterService {
 
         User user = User
                 .builder()
-                .username(normalUserRegisterDTO.getUsername())
-                .password(passwordEncoder.encode(normalUserRegisterDTO.getPassword()))
+                .username(normalUserRegisterAndEditDTO.getUsername())
+                .password(passwordEncoder.encode(normalUserRegisterAndEditDTO.getPassword()))
                 .active(1)
                 .roles("ROLE_USER")
                 .userSpecifics(userSpecifics)
@@ -64,18 +64,18 @@ class RegisterServiceImpl implements RegisterService {
 
     @SneakyThrows
     @Override
-    public User managerRegister(ManagerRegisterDTO managerRegisterDTO) {
+    public User managerRegister(ManagerRegisterAndEditDTO managerRegisterAndEditDTO) {
 
-        String[] longitudeAndLatitude = getLongitudeAndLatitude(managerRegisterDTO.getFormattedAddress());
+        String[] longitudeAndLatitude = getLongitudeAndLatitude(managerRegisterAndEditDTO.getFormattedAddress());
 
 
         Company company = Company
                 .builder()
-                .companyName(managerRegisterDTO.getCompanyName())
-                .city(managerRegisterDTO.getCity())
-                .zipCode(managerRegisterDTO.getZipCode())
-                .street(managerRegisterDTO.getStreet())
-                .localNumber(managerRegisterDTO.getLocalNumber())
+                .companyName(managerRegisterAndEditDTO.getCompanyName())
+                .city(managerRegisterAndEditDTO.getCity())
+                .zipCode(managerRegisterAndEditDTO.getZipCode())
+                .street(managerRegisterAndEditDTO.getStreet())
+                .localNumber(managerRegisterAndEditDTO.getLocalNumber())
                 .longitude(longitudeAndLatitude[0])
                 .latitude(longitudeAndLatitude[1])
                 .stampCard(null)
@@ -85,9 +85,9 @@ class RegisterServiceImpl implements RegisterService {
 
         UserSpecifics userSpecifics = UserSpecifics
                 .builder()
-                .firstName(managerRegisterDTO.getFirstName())
-                .lastName(managerRegisterDTO.getLastName())
-                .email(managerRegisterDTO.getEmail())
+                .firstName(managerRegisterAndEditDTO.getFirstName())
+                .lastName(managerRegisterAndEditDTO.getLastName())
+                .email(managerRegisterAndEditDTO.getEmail())
                 .company(company)
                 .stampCardProgresses(null)
                 .build();
@@ -96,8 +96,8 @@ class RegisterServiceImpl implements RegisterService {
 
         User user = User
                 .builder()
-                .username(managerRegisterDTO.getUsername())
-                .password(passwordEncoder.encode(managerRegisterDTO.getPassword()))
+                .username(managerRegisterAndEditDTO.getUsername())
+                .password(passwordEncoder.encode(managerRegisterAndEditDTO.getPassword()))
                 .active(1)
                 .roles("ROLE_MANAGER")
                 .userSpecifics(userSpecifics)

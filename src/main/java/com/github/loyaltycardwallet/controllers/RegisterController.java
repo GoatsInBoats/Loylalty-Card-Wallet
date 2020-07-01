@@ -1,7 +1,7 @@
 package com.github.loyaltycardwallet.controllers;
 
-import com.github.loyaltycardwallet.dto.ManagerRegisterDTO;
-import com.github.loyaltycardwallet.dto.NormalUserRegisterDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.services.RegisterService;
 import lombok.AllArgsConstructor;
@@ -26,8 +26,8 @@ public class RegisterController {
             value = "/user",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> userRegister(@RequestBody @Valid NormalUserRegisterDTO normalUserRegisterDTO) {
-        User createdUser = registerService.normalUserRegister(normalUserRegisterDTO);
+    public ResponseEntity<User> userRegister(@RequestBody @Valid NormalUserRegisterAndEditDTO normalUserRegisterAndEditDTO) {
+        User createdUser = registerService.normalUserRegister(normalUserRegisterAndEditDTO);
         return ResponseEntity.created(URI.create("/" + createdUser.getId())).body(createdUser);
     }
 
@@ -35,8 +35,8 @@ public class RegisterController {
             value = "/manager",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> managerRegister(@RequestBody @Valid ManagerRegisterDTO managerRegisterDTO) {
-        User createdUser = registerService.managerRegister(managerRegisterDTO);
+    public ResponseEntity<User> managerRegister(@RequestBody @Valid ManagerRegisterAndEditDTO managerRegisterAndEditDTO) {
+        User createdUser = registerService.managerRegister(managerRegisterAndEditDTO);
         return ResponseEntity.created(URI.create("/" + createdUser.getId())).body(createdUser);
     }
 

@@ -1,7 +1,7 @@
 package com.github.loyaltycardwallet.services.implementation;
 
-import com.github.loyaltycardwallet.dto.ManagerEditDTO;
-import com.github.loyaltycardwallet.dto.NormalUserEditDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.repositories.UserRepository;
 import com.github.loyaltycardwallet.services.UserService;
@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,6 +25,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -61,21 +63,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void editNormalUserFields(@RequestBody @Valid NormalUserEditDTO normalUserEditDTO, User normalUser) {
+    public void editNormalUserFields(@RequestBody @Valid NormalUserRegisterAndEditDTO normalUserEditDTO, User normalUser) {
         normalUser.setUsername(normalUserEditDTO.getUsername());
-        normalUser.setPassword(normalUserEditDTO.getPassword());
+        normalUser.setPassword(passwordEncoder.encode(normalUserEditDTO.getPassword()));
         normalUser.getUserSpecifics().setFirstName(normalUserEditDTO.getFirstName());
         normalUser.getUserSpecifics().setLastName(normalUserEditDTO.getLastName());
         normalUser.getUserSpecifics().setEmail(normalUserEditDTO.getEmail());
     }
 
     @Override
-    public void editManagerFields(@RequestBody @Valid ManagerEditDTO managerEditDTO, User manager) {
+    public void editManagerFields(@RequestBody @Valid ManagerRegisterAndEditDTO managerEditDTO, User manager) {
         String managerAddress = manager.getUserSpecifics().getCompany().getFormattedAddress();
         String managerEditDtoAddress = managerEditDTO.getFormattedAddress();
 
         manager.setUsername(managerEditDTO.getUsername());
-        manager.setPassword(managerEditDTO.getPassword());
+        manager.setPassword(passwordEncoder.encode(managerEditDTO.getPassword()));
         manager.getUserSpecifics().setFirstName(managerEditDTO.getFirstName());
         manager.getUserSpecifics().setLastName(managerEditDTO.getLastName());
         manager.getUserSpecifics().setEmail(managerEditDTO.getEmail());

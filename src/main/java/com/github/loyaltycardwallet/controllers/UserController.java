@@ -1,8 +1,8 @@
 package com.github.loyaltycardwallet.controllers;
 
 
-import com.github.loyaltycardwallet.dto.ManagerEditDTO;
-import com.github.loyaltycardwallet.dto.NormalUserEditDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.services.UserService;
 import lombok.AllArgsConstructor;
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/edit/normal/{id}")
-    public ResponseEntity<User> updateNormalUser(@PathVariable UUID id, @RequestBody @Valid NormalUserEditDTO normalUserEditDTO) {
+    public ResponseEntity<User> updateNormalUser(@PathVariable UUID id, @RequestBody @Valid NormalUserRegisterAndEditDTO normalUserEditDTO) {
         User normalUser = null;
         if (!userService.existById(id)) {
             return ResponseEntity.notFound().build();
@@ -91,7 +91,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/edit/manager/{id}")
-    public ResponseEntity<User> updateManager(@PathVariable UUID id, @RequestBody @Valid ManagerEditDTO managerEditDTO) throws IOException {
+    public ResponseEntity<User> updateManager(@PathVariable UUID id, @RequestBody @Valid ManagerRegisterAndEditDTO managerEditDTO) throws IOException {
         User manager = null;
         if (!userService.existById(id)) {
             return ResponseEntity.notFound().build();
