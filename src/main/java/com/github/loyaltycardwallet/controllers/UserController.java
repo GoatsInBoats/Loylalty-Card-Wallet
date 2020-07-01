@@ -1,6 +1,8 @@
 package com.github.loyaltycardwallet.controllers;
 
 
+import com.github.loyaltycardwallet.dto.ManagerEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserEditDTO;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.services.UserService;
 import lombok.AllArgsConstructor;
@@ -10,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -68,4 +72,39 @@ public class UserController {
                 .filter(user -> user.getRoles().equals(role.toUpperCase()))
                 .collect(Collectors.toList()));
     }
+
+    @PutMapping(value = "/edit/normal/{id}")
+    public ResponseEntity<User> updateNormalUser(@PathVariable UUID id, @RequestBody @Valid NormalUserEditDTO normalUserEditDTO) {
+        User normalUser = null;
+        if (!userService.existById(id)) {
+            return ResponseEntity.notFound().build();
+        } else {
+            normalUser = userService.findById(id)
+                    .orElseThrow(NoSuchElementException::new);
+        }
+
+        userService.editNormalUserFields(normalUserEditDTO, normalUser);
+
+        userService.save(normalUser);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/edit/manager/{id}")
+    public ResponseEntity<User> updateManager(@PathVariable UUID id, @RequestBody @Valid ManagerEditDTO managerEditDTO) throws IOException {
+        User manager = null;
+        if (!userService.existById(id)) {
+            return ResponseEntity.notFound().build();
+        } else {
+            manager = userService.findById(id)
+                    .orElseThrow(NoSuchElementException::new);
+        }
+
+        userService.editManagerFields(managerEditDTO, manager);
+
+        userService.save(manager);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
