@@ -73,7 +73,7 @@ public class UserController {
                 .collect(Collectors.toList()));
     }
 
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping(value = "/edit/normal/{id}")
     public ResponseEntity<User> updateNormalUser(@PathVariable UUID id, @RequestBody @Valid NormalUserEditDTO normalUserEditDTO) {
         User normalUser = null;
         if (!userService.existById(id)) {
@@ -90,7 +90,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/edit/{id}")
+    @PutMapping(value = "/edit/manager/{id}")
     public ResponseEntity<User> updateManager(@PathVariable UUID id, @RequestBody @Valid ManagerEditDTO managerEditDTO) throws IOException {
         User manager = null;
         if (!userService.existById(id)) {
