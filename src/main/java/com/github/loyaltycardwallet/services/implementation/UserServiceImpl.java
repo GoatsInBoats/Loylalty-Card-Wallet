@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void editNormalUserFields(@RequestBody @Valid NormalUserRegisterAndEditDTO normalUserEditDTO, User normalUser) {
         normalUser.setUsername(normalUserEditDTO.getUsername());
-        normalUser.setPassword(new BCryptPasswordEncoder().encode(normalUserEditDTO.getPassword()));
+        normalUser.setPassword(normalUserEditDTO.getPassword());
         normalUser.getUserSpecifics().setFirstName(normalUserEditDTO.getFirstName());
         normalUser.getUserSpecifics().setLastName(normalUserEditDTO.getLastName());
         normalUser.getUserSpecifics().setEmail(normalUserEditDTO.getEmail());
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String managerEditDtoAddress = managerEditDTO.getFormattedAddress();
 
         manager.setUsername(managerEditDTO.getUsername());
-        manager.setPassword(new BCryptPasswordEncoder().encode(managerEditDTO.getPassword()));
+        manager.setPassword(managerEditDTO.getPassword());
         manager.getUserSpecifics().setFirstName(managerEditDTO.getFirstName());
         manager.getUserSpecifics().setLastName(managerEditDTO.getLastName());
         manager.getUserSpecifics().setEmail(managerEditDTO.getEmail());
