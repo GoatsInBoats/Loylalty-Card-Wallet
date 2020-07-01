@@ -16,6 +16,7 @@ import com.github.loyaltycardwallet.repositories.UserSpecificsRepository;
 import com.github.loyaltycardwallet.services.RegisterService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @Service
 class RegisterServiceImpl implements RegisterService {
     private UserRepository userRepository;
@@ -64,7 +66,7 @@ class RegisterServiceImpl implements RegisterService {
     @Override
     public User managerRegister(ManagerRegisterDTO managerRegisterDTO) {
 
-        String[] longitudeAndLatitude = getLongitudeAndLatitude(managerRegisterDTO);
+        String[] longitudeAndLatitude = getLongitudeAndLatitude(managerRegisterDTO.getFormattedAddress());
 
 
         Company company = Company
@@ -106,11 +108,11 @@ class RegisterServiceImpl implements RegisterService {
         return user;
     }
 
-    private String[] getLongitudeAndLatitude(ManagerRegisterDTO managerRegisterDTO) throws IOException {
+    String[] getLongitudeAndLatitude(String formattedAddress) throws IOException {
 
         GeocodeController geocodeController = new GeocodeController();
 
-        String encodedAddress = URLEncoder.encode(managerRegisterDTO.getFormattedAddress(), "UTF-8");
+        String encodedAddress = URLEncoder.encode(formattedAddress, "UTF-8");
         GeocodeResult fullGeoJson = geocodeController.getGeocode(encodedAddress);
         List<GeocodeObject> geocodeObjectList = fullGeoJson.getResults();
         GeocodeObject geocodeObject = geocodeObjectList.get(0);

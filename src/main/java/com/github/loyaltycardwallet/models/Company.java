@@ -34,4 +34,7 @@ public class Company {
     @OneToOne
     private StampCard stampCard;
 
+    public String getFormattedAddress() {
+        return this.street + " " + this.localNumber + ", " + this.city;
+    }
 }

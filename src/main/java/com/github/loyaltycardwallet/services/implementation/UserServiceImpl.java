@@ -1,5 +1,7 @@
 package com.github.loyaltycardwallet.services.implementation;
 
+import com.github.loyaltycardwallet.dto.ManagerEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserEditDTO;
 import com.github.loyaltycardwallet.models.User;
 import com.github.loyaltycardwallet.repositories.UserRepository;
 import com.github.loyaltycardwallet.services.UserService;
@@ -9,7 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -54,4 +59,51 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByUsername(username);
     }
+
+    @Override
+    public void editNormalUserFields(@RequestBody @Valid NormalUserEditDTO normalUserEditDTO, User normalUser) {
+        normalUser.setUsername(normalUserEditDTO.getUsername());
+        normalUser.setPassword(normalUserEditDTO.getPassword());
+        normalUser.getUserSpecifics().setFirstName(normalUserEditDTO.getFirstName());
+        normalUser.getUserSpecifics().setLastName(normalUserEditDTO.getLastName());
+        normalUser.getUserSpecifics().setEmail(normalUserEditDTO.getEmail());
+    }
+
+    @Override
+    public void editManagerFields(@RequestBody @Valid ManagerEditDTO managerEditDTO, User manager) {
+        String managerAddress = manager.getUserSpecifics().getCompany().getFormattedAddress();
+        String managerEditDtoAddress = managerEditDTO.getFormattedAddress();
+
+        manager.setUsername(managerEditDTO.getUsername());
+        manager.setPassword(managerEditDTO.getPassword());
+        manager.getUserSpecifics().setFirstName(managerEditDTO.getFirstName());
+        manager.getUserSpecifics().setLastName(managerEditDTO.getLastName());
+        manager.getUserSpecifics().setEmail(managerEditDTO.getEmail());
+        manager.getUserSpecifics().getCompany().setCompanyName(managerEditDTO.getCompanyName());
+
+        if (managerAddress.equals(managerEditDtoAddress)) {
+            manager.getUserSpecifics().getCompany().setCity(managerEditDTO.getCity());
+            manager.getUserSpecifics().getCompany().setZipCode(managerEditDTO.getZipCode());
+            manager.getUserSpecifics().getCompany().setStreet(managerEditDTO.getStreet());
+            manager.getUserSpecifics().getCompany().setLocalNumber(managerEditDTO.getLocalNumber());
+        } else {
+            manager.getUserSpecifics().getCompany().setCity(managerEditDTO.getCity());
+            manager.getUserSpecifics().getCompany().setZipCode(managerEditDTO.getZipCode());
+            manager.getUserSpecifics().getCompany().setStreet(managerEditDTO.getStreet());
+            manager.getUserSpecifics().getCompany().setLocalNumber(managerEditDTO.getLocalNumber());
+
+            String[] coordinates = null;
+            try {
+                coordinates = new RegisterServiceImpl().getLongitudeAndLatitude(managerEditDtoAddress);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (coordinates != null) {
+                manager.getUserSpecifics().getCompany().setLongitude(coordinates[0]);
+                manager.getUserSpecifics().getCompany().setLatitude(coordinates[1]);
+            }
+        }
+    }
+
 }
