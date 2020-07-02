@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 class UserSpecificsServiceImpl implements UserSpecificsService {
 
-    private final UserSpecificsRepository userSpecificsRepository;
+    private UserSpecificsRepository userSpecificsRepository;
 
     @Override
     public List<UserSpecifics> findAll() {

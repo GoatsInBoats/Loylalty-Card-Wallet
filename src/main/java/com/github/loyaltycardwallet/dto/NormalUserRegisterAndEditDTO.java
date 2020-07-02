@@ -7,8 +7,7 @@ import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @Data
-public class ManagerRegisterDTO {
-
+public class NormalUserRegisterAndEditDTO {
     @Size(min = 5, max = 100)
     private String username;
 
@@ -23,23 +22,4 @@ public class ManagerRegisterDTO {
 
     @Size(min = 9, max = 100)
     private String email;
-
-    @Size(min = 3, max = 100)
-    private String companyName;
-
-    @Size(min = 3, max = 100)
-    private String city;
-
-    @Size(min = 5, max = 100)
-    private String zipCode;
-
-    @Size(min = 3, max = 100)
-    private String street;
-
-    private long localNumber;
-
-    public String getFormattedAddress() {
-        return this.street + " " + this.localNumber + ", " + this.city;
-    }
-
 }

@@ -1,11 +1,11 @@
 package com.github.loyaltycardwallet.services;
 
-import com.github.loyaltycardwallet.dto.ManagerRegisterDTO;
-import com.github.loyaltycardwallet.dto.NormalUserRegisterDTO;
+import com.github.loyaltycardwallet.dto.ManagerRegisterAndEditDTO;
+import com.github.loyaltycardwallet.dto.NormalUserRegisterAndEditDTO;
 import com.github.loyaltycardwallet.models.User;
 
 public interface RegisterService {
-    User normalUserRegister(NormalUserRegisterDTO normalUserRegisterDTO);
+    User normalUserRegister(NormalUserRegisterAndEditDTO normalUserRegisterAndEditDTO);
 
-    User managerRegister(ManagerRegisterDTO managerRegisterDTO);
+    User managerRegister(ManagerRegisterAndEditDTO managerRegisterAndEditDTO);
 }
