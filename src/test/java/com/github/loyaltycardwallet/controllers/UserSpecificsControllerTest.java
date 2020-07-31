@@ -68,7 +68,7 @@ class UserSpecificsControllerTest {
     }
 
 
-    @Test
+    @Test()
     void testDoesMethodGetAllUsersSpecificsReturnsStatusCode200() throws Exception {
         List<UserSpecifics> userspecificsList = new ArrayList<>(Arrays.asList(manager1Specifics));
 
