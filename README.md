@@ -6,7 +6,6 @@
 - [Built-with](#built-with)
 - [Installing](#installing)
 - [Run](#run)
-- [Presentation](#presentation)
 - [Contact](#contact)
 
 ## About <a name = "about"></a>
